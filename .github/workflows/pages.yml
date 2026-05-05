@@ -11,7 +11,7 @@ jobs:
   # -------------------------------------------------
   validate:
     runs-on: ubuntu-latest
-    container: structurizr/cli
+    container: structurizr/structurizr
     #runs-on: structurizr/cli
     steps:
       - uses: actions/checkout@v3
