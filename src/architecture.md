@@ -1,4 +1,4 @@
-# PID Service
+# C4 Modell PID Service
 
 Die folgenden Diagramme erläutern das Konzept und die Architektur eines 
 Dienstes für die Erstellung von einheiltichen und persistenten Identifikatoren.
