@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Show container info
         run: |
+          docker ps -a
           echo "===== OS ====="
           cat /etc/os-release
           echo "===== PATH ====="
@@ -32,7 +33,7 @@ jobs:
           java -jar /usr/local/structurizr-cli/structurizr-cli.jar validate -w workspace.dsl
           
   # -------------------------------------------------
-  # 2️⃣ Generate the site **and** the diagram images
+  # Generate the site **and** the diagram images
   # -------------------------------------------------
   pages:
     needs: [validate]
@@ -43,7 +44,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # -----------------------------------------------------------------
-      # 2a️⃣ Generate the static site (HTML, CSS, JS) – same as before
+      # Generate the static site (HTML, CSS, JS) – same as before
       # -----------------------------------------------------------------
       - name: Generate static site
         working-directory: src
@@ -52,7 +53,7 @@ jobs:
             -w workspace.dsl -d main -o ${{ github.workspace }}/public
 
       # -----------------------------------------------------------------
-      # 2b️⃣ Export the diagrams (PNG) – this is the missing piece
+      # Export the diagrams (PNG) – this is the missing piece
       # -----------------------------------------------------------------
       - name: Export diagrams (PNG)
         working-directory: src
@@ -63,7 +64,7 @@ jobs:
             -format png -output ${{ github.workspace }}/public/diagrams
 
       # -----------------------------------------------------------------
-      # 2c️⃣ Verify that the images are really there (debug step)
+      # Verify that the images are really there (debug step)
       # -----------------------------------------------------------------
       - name: List generated files (debug)
         run: |
@@ -73,7 +74,7 @@ jobs:
           ls -R ${{ github.workspace }}/public/diagrams || true
 
       # -----------------------------------------------------------------
-      # 3️⃣ Deploy to GitHub Pages
+      # Deploy to GitHub Pages
       # -----------------------------------------------------------------
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
