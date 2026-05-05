@@ -11,34 +11,15 @@ jobs:
   # -------------------------------------------------
   validate:
     runs-on: ubuntu-latest
-#    container: 
-#      image: structurizr/structurizr
-#      options: --entrypoint "" 
-    #runs-on: structurizr/cli
     steps:
       - name: install structurizr
         run: |
           docker pull structurizr/structurizr
       - uses: actions/checkout@v3
-      - name: Show container info
-        run: |
-          echo "===== ls ====="
-          ls 
-          echo "===== ls /user/local ====="
-          ls /usr/local/
-          echo "===== OS ====="
-          cat /etc/os-release
-          echo "===== PATH ====="
-          echo $PATH
-          echo "===== Which structurizr.sh ====="
-          which structurizr.sh || echo "not on PATH"
-          echo "===== List possible locations ====="
-          ls -l /usr/local/structurizr-cli 2>/dev/null || echo "folder missing"
-          ls -l /usr/local/bin/structurizr.sh 2>/dev/null || echo "script missing"
       - name: Validate workspace
         working-directory: src
         run: |
-          java -jar /usr/local/structurizr-cli/structurizr-cli.jar validate -w workspace.dsl
+          docker run -it --rm -v $PWD:/usr/local/structurizr structurizr/structurizr validate
           
   # -------------------------------------------------
   # Generate the site **and** the diagram images
