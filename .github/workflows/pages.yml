@@ -42,8 +42,7 @@ jobs:
           touch ${{ github.workspace }}/public/index.html
           docker run --rm -v $PWD:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
-            --workspace-file workspace.dsl \
-            -d main 
+            --workspace-file workspace.dsl 
 
       # -----------------------------------------------------------------
       # Export the diagrams (PNG) – this is the missing piece
