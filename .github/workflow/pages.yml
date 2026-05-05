@@ -17,8 +17,7 @@ jobs:
 
       - name: Validate workspace
         working-directory: src
-        run: |
-          /usr/local/structurizr-cli/structurizr.sh validate -w workspace.dsl
+        run: /usr/local/structurizr-cli/structurizr.sh validate -w workspace.dsl
 
   pages:
     needs: [validate]               # wait for validation to succeed
@@ -31,8 +30,7 @@ jobs:
 
       - name: Generate site
         working-directory: src
-        run: |
-          /opt/structurizr-site-generatr/bin/structurizr-site-generatr generate-site \
+        run: /opt/structurizr-site-generatr/bin/structurizr-site-generatr generate-site \
             -w workspace.dsl -d main -o ../public
 
       # Publish the generated site to GitHub Pages
