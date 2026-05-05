@@ -15,7 +15,17 @@ jobs:
       image: structurizr/cli   # same image you used in GitLab
     steps:
       - uses: actions/checkout@v3
-
+      - name: Show container info
+        run: |
+          echo "===== OS ====="
+          cat /etc/os-release
+          echo "===== PATH ====="
+          echo $PATH
+          echo "===== Which structurizr.sh ====="
+          which structurizr.sh || echo "not on PATH"
+          echo "===== List possible locations ====="
+          ls -l /usr/local/structurizr-cli 2>/dev/null || echo "folder missing"
+          ls -l /usr/local/bin/structurizr.sh 2>/dev/null || echo "script missing"
       - name: Validate workspace
         working-directory: src
         run: |
