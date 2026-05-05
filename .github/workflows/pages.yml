@@ -42,7 +42,7 @@ jobs:
           touch ${{ github.workspace }}/public/index.html
           docker run --rm -v $PWD:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
-            --workspace-file workspace.dsl --assets-dir assets \
+            --workspace-file workspace.dsl \
             -d main -o ${{ github.workspace }}/public
 
       # -----------------------------------------------------------------
