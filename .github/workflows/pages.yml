@@ -11,11 +11,14 @@ jobs:
   # -------------------------------------------------
   validate:
     runs-on: ubuntu-latest
-    container: 
-      image: structurizr/structurizr
-      options: --entrypoint "" 
+#    container: 
+#      image: structurizr/structurizr
+#      options: --entrypoint "" 
     #runs-on: structurizr/cli
     steps:
+      - name: install structurizr
+        run: |
+          docker pull structurizr/structurizr
       - uses: actions/checkout@v3
       - name: Show container info
         run: |
