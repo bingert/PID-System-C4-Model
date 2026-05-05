@@ -2,8 +2,8 @@ name: Build & Deploy GitHub Pages
 
 on:
   push:
-    branches: [main]          # same rule you had in GitLab
-  workflow_dispatch:          # optional manual trigger
+    branches: [main]          
+  workflow_dispatch:          
 
 jobs:
   # -------------------------------------------------
@@ -11,8 +11,7 @@ jobs:
   # -------------------------------------------------
   validate:
     runs-on: ubuntu-latest
-    container:
-      image: structurizr/cli   # same image you used in GitLab
+    container: structurizr/cli   
     steps:
       - uses: actions/checkout@v3
       - name: Show container info
