@@ -1,0 +1,45 @@
+name: Build & Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main               # run only on pushes to the main branch
+  workflow_dispatch:       # optional – lets you trigger it manually
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    container:
+      image: structurizr/cli   # same image you used in GitLab
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Validate workspace
+        working-directory: src
+        run: |
+          /usr/local/structurizr-cli/structurizr.sh validate -w workspace.dsl
+
+  pages:
+    needs: [validate]               # wait for validation to succeed
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/avisi-cloud/structurizr-site-generatr:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Generate site
+        working-directory: src
+        run: |
+          /opt/structurizr-site-generatr/bin/structurizr-site-generatr generate-site \
+            -w workspace.dsl -d main -o ../public
+
+      # Publish the generated site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          # optional: keep a clean history
+          force_orphan: true
