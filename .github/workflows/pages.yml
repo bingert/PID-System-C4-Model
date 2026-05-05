@@ -20,7 +20,7 @@ jobs:
         working-directory: src
         run: |
           ls
-          docker run -it --rm -v $PWD:/usr/local/structurizr structurizr/structurizr validate  -workspace workspace.dsl
+          docker run --rm -v $PWD:/usr/local/structurizr structurizr/structurizr validate  -workspace workspace.dsl
   # -------------------------------------------------
   # Generate the site **and** the diagram images
   # -------------------------------------------------
