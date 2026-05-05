@@ -38,7 +38,10 @@ jobs:
       - name: Generate static site
         working-directory: src
         run: |
-          sudo docker run --rm -v .:/var/model \
+          ls -la ../
+          whoami
+          ls -la
+          docker run --rm -v .:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
             --workspace-file workspace.dsl 
 
