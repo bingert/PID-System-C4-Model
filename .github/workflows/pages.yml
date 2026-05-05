@@ -18,7 +18,7 @@ jobs:
       - name: install structurizr
         run: |
           docker pull structurizr/structurizr
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Validate workspace
         working-directory: src
         run: |
@@ -34,7 +34,7 @@ jobs:
       - name: install structurizr-site-generatr
         run: |
           docker pull ghcr.io/avisi-cloud/structurizr-site-generatr
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # -----------------------------------------------------------------
       # Generate the static site (HTML, CSS, JS) – same as before
       # -----------------------------------------------------------------
@@ -44,6 +44,8 @@ jobs:
           docker run --user root --rm -v .:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
             --workspace-file workspace.dsl
+          ls -lta
+          ls -lta ../
           #cp -R ./build/site/* ${{ github.workspace }}/public/
 
       # -----------------------------------------------------------------
