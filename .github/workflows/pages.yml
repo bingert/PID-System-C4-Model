@@ -4,7 +4,10 @@ on:
   push:
     branches: [main]          
   workflow_dispatch:          
-
+permissions:
+  contents: write      
+  pages: write
+  
 jobs:
   # -------------------------------------------------
   # Validate the DSL
@@ -38,7 +41,6 @@ jobs:
       - name: Generate static site
         working-directory: src
         run: |
-          id runner
           docker run --user root --rm -v .:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
             --workspace-file workspace.dsl 
