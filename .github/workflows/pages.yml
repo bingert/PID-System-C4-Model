@@ -7,7 +7,7 @@ on:
 
 jobs:
   # -------------------------------------------------
-  # Validate the DSL (unchanged)
+  # Validate the DSL
   # -------------------------------------------------
   validate:
     runs-on: ubuntu-latest
@@ -19,9 +19,10 @@ jobs:
       - name: Validate workspace
         working-directory: src
         run: |
-          docker run --rm -v $PWD:/usr/local/structurizr structurizr/structurizr validate  -workspace workspace.dsl
+          docker run --rm -v $PWD:/usr/local/structurizr \
+            structurizr/structurizr validate  -workspace workspace.dsl
   # -------------------------------------------------
-  # Generate the site **and** the diagram images
+  # Generate the site the diagram images
   # -------------------------------------------------
   pages:
     needs: [validate]
@@ -37,7 +38,7 @@ jobs:
       - name: Generate static site
         working-directory: src
         run: |
-          docker run -it --rm -v c:/projects/c4:/var/model \
+          docker run --rm -v c:/projects/c4:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
             --workspace-file workspace.dsl --assets-dir assets \
             -o ${{ github.workspace }}/public
@@ -50,18 +51,9 @@ jobs:
         run: |
           # The CLI can export all diagrams as PNG files.
           # The `-format png` flag forces PNG output.
-          /usr/local/structurizr-cli/structurizr.sh export -w workspace.dsl \
+          docker run --rm -v $PWD:/usr/local/structurizr \
+            structurizr/structurizr export -w workspace.dsl \
             -format png -output ${{ github.workspace }}/public/diagrams
-
-      # -----------------------------------------------------------------
-      # Verify that the images are really there (debug step)
-      # -----------------------------------------------------------------
-      - name: List generated files (debug)
-        run: |
-          echo "=== CONTENT OF public/ ==="
-          ls -R ${{ github.workspace }}/public
-          echo "=== CONTENT OF public/diagrams ==="
-          ls -R ${{ github.workspace }}/public/diagrams || true
 
       # -----------------------------------------------------------------
       # Deploy to GitHub Pages
