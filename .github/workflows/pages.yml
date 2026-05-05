@@ -10,10 +10,11 @@ jobs:
   # Validate the DSL (unchanged)
   # -------------------------------------------------
   validate:
-    runs-on: ubuntu-latest
-    container: structurizr/cli   
+    #runs-on: ubuntu-latest
+    #container: structurizr/cli
+    runs-on: structurizr/cli
     steps:
-      #- uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Show container info
         run: |
           echo "===== ls ====="
