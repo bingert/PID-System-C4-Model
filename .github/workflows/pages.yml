@@ -44,7 +44,7 @@ jobs:
           docker run --user root --rm -v .:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
             --workspace-file workspace.dsl
-          cp -R ./build/site/* ${{ github.workspace }}/public/
+          #cp -R ./build/site/* ${{ github.workspace }}/public/
 
       # -----------------------------------------------------------------
       # Export the diagrams (PNG) – this is the missing piece
@@ -66,5 +66,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ github.workspace }}/public
+          publish_dir: ${{ github.workspace }}/build/site
           force_orphan: true   # creates a clean gh‑pages branch
