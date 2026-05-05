@@ -38,24 +38,24 @@ jobs:
       - name: Generate static site
         working-directory: src
         run: |
-          docker run --rm ghcr.io/avisi-cloud/structurizr-site-generatr --help
+          #docker run --rm ghcr.io/avisi-cloud/structurizr-site-generatr --help
           ls ../
-          docker run --rm -v .:/var/model \
-            ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
-            --workspace-file workspace.dsl 
+          #docker run --rm -v .:/var/model \
+          #  ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
+          #  --workspace-file workspace.dsl 
 
       # -----------------------------------------------------------------
       # Export the diagrams (PNG) – this is the missing piece
       # -----------------------------------------------------------------
-      - name: Export diagrams (PNG)
-        working-directory: src
-        run: |
-          mkdir -p ${{ github.workspace }}/public/diagrams
-          # The CLI can export all diagrams as PNG files.
-          # The `-format png` flag forces PNG output.
-          docker run --rm -v $PWD:/usr/local/structurizr \
-            structurizr/structurizr export -w workspace.dsl \
-            -format png -output ${{ github.workspace }}/public/diagrams
+      #- name: Export diagrams (PNG)
+      #  working-directory: src
+      #  run: |
+      #    mkdir -p ${{ github.workspace }}/public/diagrams
+      #    # The CLI can export all diagrams as PNG files.
+      #    # The `-format png` flag forces PNG output.
+      #    docker run --rm -v $PWD:/usr/local/structurizr \
+      #      structurizr/structurizr export -w workspace.dsl \
+      #      -format png -output ${{ github.workspace }}/public/diagrams
 
       # -----------------------------------------------------------------
       # Deploy to GitHub Pages
