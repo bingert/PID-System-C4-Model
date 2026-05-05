@@ -19,8 +19,8 @@ jobs:
       - name: Validate workspace
         working-directory: src
         run: |
-          structurizr.sh validate -w workspace.dsl
-
+          java -jar /usr/local/structurizr-cli/structurizr-cli.jar validate -w workspace.dsl
+          
   # -------------------------------------------------
   # 2️⃣ Generate the site **and** the diagram images
   # -------------------------------------------------
