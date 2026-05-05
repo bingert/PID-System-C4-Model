@@ -1,0 +1,43 @@
+@startuml
+set separator none
+title PID-Service - Containers
+
+left to right direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+AddElementTag("Element", $bgColor="#1168bd", $borderColor="#0b4884", $fontColor="#ffffff", $sprite="", $shadowing="", $borderStyle="solid")
+AddElementTag("Person", $bgColor="#073b6f", $borderColor="#04294d", $fontColor="#ffffff", $sprite="", $shadowing="", $borderStyle="solid")
+
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
+
+AddBoundaryTag("Element", $bgColor="#ffffff", $borderColor="#0b4884", $fontColor="#0b4884", $shadowing="", $borderStyle="solid")
+
+Person(User, "User", $descr="", $tags="Person", $link="")
+Person(Client, "Client", $descr="", $tags="Person", $link="")
+
+System_Boundary("PIDService_boundary", "PID-Service", $tags="Element") {
+  Container(PIDService.AuthenticationServer, "Authentication Server", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.PIDResolver, "PID Resolver", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.PIDCreateUpdate, "PID Create/Update", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.servicequalitymonitoringassurance, "service quality - monitoring - assurance", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.WebApplication, "Web Application", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.Database, "Database", $techn="", $descr="{}", $tags="Element", $link="")
+  Container(PIDService.API, "API", $techn="", $descr="{}", $tags="Element", $link="")
+}
+
+Rel(PIDService.API, PIDService.PIDResolver, "resolve", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.API, PIDService.PIDCreateUpdate, "create/update", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.API, PIDService.AuthenticationServer, "uses", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.WebApplication, PIDService.API, "use", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.PIDResolver, PIDService.Database, "lookup", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.PIDCreateUpdate, PIDService.Database, "create/update", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.servicequalitymonitoringassurance, PIDService.Database, "uses", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.WebApplication, PIDService.servicequalitymonitoringassurance, "integrates", $techn="", $tags="Relationship", $link="")
+Rel(User, PIDService.WebApplication, "Uses", $techn="", $tags="Relationship", $link="")
+Rel(Client, PIDService.API, "uses", $techn="", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml
