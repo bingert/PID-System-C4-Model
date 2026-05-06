@@ -11,7 +11,7 @@ Für die Darstellung wird das C4 Modell verwendet:
 
 Die Diagramme sind interaktiv und ermöglichen die Darstellung weiterer Ebenen.
 
-## Service Übersicht
+## PID Service Übersicht
 
 Es werden zwei Verwendungsmöglichkeiten unterschieden:
 1. "User": Eine Person die interaktive mit einer WebUI arbeitet
