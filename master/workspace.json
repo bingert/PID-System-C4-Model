@@ -1,0 +1,403 @@
+{
+  "configuration" : { },
+  "description" : "Architecture Overview on a PID service",
+  "documentation" : {
+    "sections" : [ {
+      "content" : "# C4 Modell PID Service\n\nDie folgenden Diagramme erläutern das Konzept und die Architektur eines \nDienstes für die Erstellung von einheiltichen und persistenten Identifikatoren.\n\nFür die Darstellung wird das C4 Modell verwendet:\n1. Context‑Ebene – Zeigt, wer (Menschen, Systeme) mit dem System interagiert und welchen Zweck das System hat.\n2. Container‑Ebene – Zerlegt das System in größere Bausteine (z. B. Web‑App, Datenbank, Mobile‑App) und erklärt, wie diese miteinander kommunizieren.\n3. Component‑Ebene – Blickt in jeden Container und stellt die wichtigsten Bauteile (Komponenten) dar, die dort intern zusammenarbeiten.\n4. Code‑Ebene – Zeigt die detaillierten Implementierungsdetails einer einzelnen Komponente, etwa Klassen, Schnittstellen oder Methoden.\n\nDie Diagramme sind interaktiv und ermöglichen die Darstellung weiterer Ebenen.\n\n## Service Übersicht\n\nEs werden zwei Verwendungsmöglichkeiten unterschieden:\n1. \"User\": Eine Person die interaktive mit einer WebUI arbeitet\n2. \"Client\": Eine Maschine (Software) die automatisiert Aufgaben abarbeitet\n\n![System Context AP2](embed:pid_service_system_context)\n",
+      "format" : "Markdown",
+      "order" : 1,
+      "title" : ""
+    } ]
+  },
+  "id" : 0,
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "User",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user"
+      },
+      "relationships" : [ {
+        "description" : "Uses",
+        "destinationId" : "4",
+        "id" : "22",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Uses",
+        "destinationId" : "3",
+        "id" : "23",
+        "linkedRelationshipId" : "22",
+        "sourceId" : "1"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Client",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user2"
+      },
+      "relationships" : [ {
+        "description" : "uses",
+        "destinationId" : "9",
+        "id" : "24",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "uses",
+        "destinationId" : "3",
+        "id" : "25",
+        "linkedRelationshipId" : "24",
+        "sourceId" : "2"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "properties" : {
+      "structurizr.groupSeparator" : ":"
+    },
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "components" : [ {
+          "description" : "{}",
+          "documentation" : { },
+          "id" : "5",
+          "name" : "Namensraum Verwaltung",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pid_service.webapp.namespace"
+          },
+          "tags" : "Element,Component"
+        }, {
+          "description" : "{}",
+          "documentation" : { },
+          "id" : "6",
+          "name" : "Nutzer Verwaltung",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pid_service.webapp.account"
+          },
+          "tags" : "Element,Component"
+        }, {
+          "description" : "{}",
+          "documentation" : { },
+          "id" : "7",
+          "name" : "Statusanzeige",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pid_service.webapp.status"
+          },
+          "tags" : "Element,Component"
+        } ],
+        "documentation" : { },
+        "id" : "4",
+        "name" : "Web Application",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.webapp"
+        },
+        "relationships" : [ {
+          "description" : "use",
+          "destinationId" : "9",
+          "id" : "17",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        }, {
+          "description" : "integrates",
+          "destinationId" : "13",
+          "id" : "21",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "description" : "{}",
+        "documentation" : { },
+        "id" : "8",
+        "name" : "Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.database"
+        },
+        "tags" : "Element,Container"
+      }, {
+        "description" : "{}",
+        "documentation" : { },
+        "id" : "9",
+        "name" : "API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.api"
+        },
+        "relationships" : [ {
+          "description" : "resolve",
+          "destinationId" : "11",
+          "id" : "14",
+          "sourceId" : "9",
+          "tags" : "Relationship"
+        }, {
+          "description" : "create/update",
+          "destinationId" : "12",
+          "id" : "15",
+          "sourceId" : "9",
+          "tags" : "Relationship"
+        }, {
+          "description" : "uses",
+          "destinationId" : "10",
+          "id" : "16",
+          "sourceId" : "9",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "documentation" : { },
+        "id" : "10",
+        "name" : "Authentication Server",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.aai"
+        },
+        "tags" : "Element,Container"
+      }, {
+        "documentation" : { },
+        "id" : "11",
+        "name" : "PID Resolver",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.resolver"
+        },
+        "relationships" : [ {
+          "description" : "lookup",
+          "destinationId" : "8",
+          "id" : "18",
+          "sourceId" : "11",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "documentation" : { },
+        "id" : "12",
+        "name" : "PID Create/Update",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.manager"
+        },
+        "relationships" : [ {
+          "description" : "create/update",
+          "destinationId" : "8",
+          "id" : "19",
+          "sourceId" : "12",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "documentation" : { },
+        "id" : "13",
+        "name" : "service quality - monitoring - assurance",
+        "properties" : {
+          "structurizr.dsl.identifier" : "pid_service.monitor"
+        },
+        "relationships" : [ {
+          "description" : "uses",
+          "destinationId" : "8",
+          "id" : "20",
+          "sourceId" : "13",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container"
+      } ],
+      "description" : "Service for PID management and resolution.",
+      "documentation" : { },
+      "group" : "pid_service",
+      "id" : "3",
+      "location" : "Unspecified",
+      "name" : "PID-Service",
+      "properties" : {
+        "structurizr.dsl.identifier" : "pid_service"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "PID System Architecture",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJQSUQgU3lzdGVtIEFyY2hpdGVjdHVyZSIgIkFyY2hpdGVjdHVyZSBPdmVydmlldyBvbiBhIFBJRCBzZXJ2aWNlIiB7CiAgICAhaWRlbnRpZmllcnMgaGllcmFyY2hpY2FsCiAgICAvLyBpcyB1c2VkIHRvIGFsbG93IHVzIHRvIHJlZmVyIHRvIHRob3NlIGNvbnRhaW5lcnMgdmlhIHRoZWlyIGZ1bGx5IHF1YWxpZmllZCBpZGVudGlmaWVyLgoKICAgIC8vIWFkcnMgImRlY2lzaW9ucyIKICAgICFkb2NzICJhcmNoaXRlY3R1cmUubWQiCiAgICAjIWRvY3MgImRvY3MiCgogICAgY29uZmlndXJhdGlvbiB7CiAgICAgICAgLy9zY29wZSBsYW5kc2NhcGUKICAgIH0KCiAgICBtb2RlbCB7CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJzdHJ1Y3R1cml6ci5ncm91cFNlcGFyYXRvciIgIjoiCiAgICAgICAgfQogICAgCiAgICAgICAgIyBlYWNoIGdyb3VwIHNob3VsZCBoYXZlIGl0J3Mgb3duIGZpbGUgZGVmaW5pbmcgdGhlIGVudGl0aWVzIChlLmcuIHNvZnR3YXJlU3lzdGVtcywgY29udGFpbmVycykgYW5kCiAgICAgICAgIyByZWxhdGlvbnMgYmV0d2VlbiBlbnRpdGllcyBvZiB0aGUgc2FtZSBncm91cC4KICAgIAogICAgICAgICMhaW5jbHVkZSBuYW5vcHViLmRzbAogICAgICAgICMhaW5jbHVkZSBoYW5kbGUuZHNsCiAgICAgICAgIyFpbmNsdWRlIG9wZXJhdGlvbnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIHJlcG9zaXRvcmllcy5kc2wKICAgICAgICAjIWluY2x1ZGUgbWFuYWdlci5kc2wKICAgICAgICAjIWluY2x1ZGUgYWRhcHRlcnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIGFwMi9hcDIuZHNsCiAgICAgICAgCiAgICAgICAgdXNlciA9IHBlcnNvbiAiVXNlciIgewogICAgICAgIAogICAgICAgIH0KICAgICAgICAKICAgICAgICB1c2VyMiA9IHBlcnNvbiAiQ2xpZW50IiB7CiAgICAgICAgICAgIAogICAgICAgIH0KICAgICAgICBncm91cCAicGlkX3NlcnZpY2UiIHsKICAgICAgICAgICAgCiAgICAgICAgCiAgICAgICAgICAgIHBpZF9zZXJ2aWNlID0gc29mdHdhcmVTeXN0ZW0gIlBJRC1TZXJ2aWNlIiAiU2VydmljZSBmb3IgUElEIG1hbmFnZW1lbnQgYW5kIHJlc29sdXRpb24uIiB7CiAgICAgICAgICAgICAgICB3ZWJhcHAgPSBjb250YWluZXIgIldlYiBBcHBsaWNhdGlvbiIgewogICAgICAgICAgICAgICAgICAgIG5hbWVzcGFjZSA9IGNvbXBvbmVudCAiTmFtZW5zcmF1bSBWZXJ3YWx0dW5nIiB7fQogICAgICAgICAgICAgICAgICAgIGFjY291bnQgPSBjb21wb25lbnQgIk51dHplciBWZXJ3YWx0dW5nIiB7fQogICAgICAgICAgICAgICAgICAgIHN0YXR1cyA9IGNvbXBvbmVudCAiU3RhdHVzYW56ZWlnZSIge30KICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGRhdGFiYXNlID0gY29udGFpbmVyICJEYXRhYmFzZSIge30KICAgICAgICAKICAgICAgICAgICAgICAgIGFwaSA9IGNvbnRhaW5lciAiQVBJIiB7fQogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICBBQUkgPSBjb250YWluZXIgIkF1dGhlbnRpY2F0aW9uIFNlcnZlciIKICAgICAgICAgICAgICAgIHJlc29sdmVyID0gY29udGFpbmVyICJQSUQgUmVzb2x2ZXIiIAogICAgICAgICAgICAgICAgbWFuYWdlciA9IGNvbnRhaW5lciAiUElEIENyZWF0ZS9VcGRhdGUiIAogICAgICAgICAgICAgICAgbW9uaXRvciA9IGNvbnRhaW5lciAic2VydmljZSBxdWFsaXR5IC0gbW9uaXRvcmluZyAtIGFzc3VyYW5jZSIKICAgICAgICAKICAgICAgICAgICAgICAgIGFwaSAtPiByZXNvbHZlciAicmVzb2x2ZSIgCiAgICAgICAgICAgICAgICBhcGkgLT4gbWFuYWdlciAiY3JlYXRlL3VwZGF0ZSIKICAgICAgICAgICAgICAgIGFwaSAtPiBBQUkgInVzZXMiCiAgICAgICAgICAgICAgICB3ZWJhcHAgLT4gYXBpICJ1c2UiCiAgICAgICAgICAgICAgICByZXNvbHZlciAtPiBkYXRhYmFzZSAibG9va3VwIgogICAgICAgICAgICAgICAgbWFuYWdlciAtPiBkYXRhYmFzZSAiY3JlYXRlL3VwZGF0ZSIKICAgICAgICAgICAgICAgIG1vbml0b3IgLT4gZGF0YWJhc2UgInVzZXMiCiAgICAgICAgICAgICAgICB3ZWJhcHAgLT4gbW9uaXRvciAiaW50ZWdyYXRlcyIKICAgICAgICAgICAgfQogICAgICAgICAgICB1c2VyIC0+IHBpZF9zZXJ2aWNlLndlYmFwcCAiVXNlcyIKICAgICAgICAgICAgdXNlcjIgLT4gcGlkX3NlcnZpY2UuYXBpICJ1c2VzIgogICAgICAgIAogICAgICAgIH0KICAgIAogICAgICAgICMgdGhlIHJlbGF0aW9ucyBmaWxlIGNvbnRhaW5zIHRoZSBpbnRlci1ncm91cCByZWxhdGlvbnMKICAgICAgICAjIWluY2x1ZGUgcmVsYXRpb25zLmRzbAogICAgICAgICMhaW5jbHVkZSBhcDIvcmVsYXRpb25zLmRzbAogICAgCiAgICAgICAgIyBzcGVjaWFsIGZpbGUgZm9yIGRlcGxveW1lbnQKICAgICAgICAjIWluY2x1ZGUgImRlcGxveW1lbnQuZHNsIgogICAgCiAgICB9CgogICAgdmlld3MgewogICAgICAgIHByb3BlcnRpZXMgewogICAgICAgICAgICAiYzRwbGFudHVtbC50YWdzIiB0cnVlCiAgICAgICAgICAgICJnZW5lcmF0ci5zaXRlLm5lc3RHcm91cHMiIHRydWUKICAgICAgICAgICAgImdlbmVyYXRyLnNpdGUuZXh0ZXJuYWxUYWciICJFeHRlcm4iCiAgICAgICAgfQogICAgICAgIHN5c3RlbUxhbmRzY2FwZSBzbCAiU3lzdGVtIExhbmRzY2FwZSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgIyBhdXRvbGF5b3V0IGxyCiAgICAgICAgfQoKICAgICAgICAjIFJ1bnRpbWUgdmlldyBkZWZpbml0aW9ucwogICAgICAgIAogICAgICAgIC8qCiAgICAgICAgZHluYW1pYyBoYW5kbGVfc2VydmVyIHJlc29sdmVfcGlkIHsKICAgICAgICAKICAgICAgICAgICAgdGl0bGUgIlJlc29sdmUgUElEIHZpYSBETy1JUlAiCiAgICAgICAgCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICB9CiAgICAgICAgKi8KICAgICAgICBzeXN0ZW1Db250ZXh0IHBpZF9zZXJ2aWNlIHBpZF9zZXJ2aWNlX3N5c3RlbV9jb250ZXh0IHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CiAgICAgICAgCiAgICAgICAgY29udGFpbmVyIHBpZF9zZXJ2aWNlIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CiAgICAgICAgCiAgICAgICAgY29tcG9uZW50IHBpZF9zZXJ2aWNlLndlYmFwcCB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvbGF5b3V0IGxyCiAgICAgICAgfQoKICAgICAgICAvL2RlcGxveW1lbnQgKiB0ZXN0YmVkIHRlc3RiZWRfZGVwbG95bWVudCB7CiAgICAgICAgLy8gICAgaW5jbHVkZSAqCiAgICAgICAgLy8gICAgYXV0b2xheW91dCBscgogICAgICAgIC8vfQoKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJFbGVtZW50IiB7CiAgICAgICAgICAgICAgICBjb2xvciB3aGl0ZQogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMTE2OEJECiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNzNCNkYKICAgICAgICAgICAgICAgIHNoYXBlIHBlcnNvbgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkV4dGVybiIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjN0E5REJGCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJnZW5lcmF0ci5tYXJrZG93bi5mbGV4bWFyay5leHRlbnNpb25zIiAiVGFibGVPZkNvbnRlbnRzLFRhYmxlcyxBZG1vbml0aW9uLEZvb3Rub3RlcyIKICAgICAgICB9CiAgICB9Cn0="
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "4",
+      "elements" : [ {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "generatedKey" : true,
+      "key" : "Component-001",
+      "order" : 4
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "properties" : {
+        "generatr.site.nestGroups" : "true",
+        "generatr.site.externalTag" : "Extern",
+        "c4plantuml.tags" : "true",
+        "generatr.markdown.flexmark.extensions" : "TableOfContents,Tables,Admonition,Footnotes"
+      },
+      "styles" : {
+        "elements" : [ {
+          "background" : "#1168bd",
+          "color" : "#ffffff",
+          "tag" : "Element"
+        }, {
+          "background" : "#073b6f",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "background" : "#7a9dbf",
+          "tag" : "Extern"
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "generatedKey" : true,
+      "key" : "Container-001",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "14"
+      }, {
+        "id" : "15"
+      }, {
+        "id" : "16"
+      }, {
+        "id" : "17"
+      }, {
+        "id" : "18"
+      }, {
+        "id" : "19"
+      }, {
+        "id" : "20"
+      }, {
+        "id" : "21"
+      }, {
+        "id" : "22"
+      }, {
+        "id" : "24"
+      } ],
+      "softwareSystemId" : "3"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "pid_service_system_context",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "23"
+      }, {
+        "id" : "25"
+      } ],
+      "softwareSystemId" : "3"
+    } ],
+    "systemLandscapeViews" : [ {
+      "description" : "System Landscape",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "sl",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "23"
+      }, {
+        "id" : "25"
+      } ]
+    } ]
+  }
+}
