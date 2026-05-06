@@ -28,7 +28,7 @@ jobs:
   # Generate the site the diagram images
   # -------------------------------------------------
   pages:
-    needs: [validate]
+    #needs: [validate]
     runs-on: ubuntu-latest
     steps:
       - name: install structurizr-site-generatr
@@ -44,8 +44,8 @@ jobs:
           docker run --user root --rm -v .:/var/model \
             ghcr.io/avisi-cloud/structurizr-site-generatr generate-site \
             --workspace-file workspace.dsl
-          ls -lta
-          ls -lta ../
+          echo $PWD
+          echo ${{ github.workspace }}
           #cp -R ./build/site/* ${{ github.workspace }}/public/
 
       # -----------------------------------------------------------------
@@ -68,5 +68,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ github.workspace }}/build/site
-          force_orphan: true   # creates a clean gh‑pages branch
+          publish_dir: $PWD/build/site
+          #force_orphan: true   # creates a clean gh‑pages branch
+          allow_empty_commit: true
