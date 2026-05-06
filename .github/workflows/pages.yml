@@ -65,9 +65,9 @@ jobs:
       # Deploy to GitHub Pages
       # -----------------------------------------------------------------
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: $PWD/build/site
+          publish_dir: ${{ github.workspace }}/src/build/site/
           #force_orphan: true   # creates a clean gh‑pages branch
-          allow_empty_commit: true
+          #allow_empty_commit: true
