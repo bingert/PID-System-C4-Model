@@ -1,0 +1,21 @@
+@startuml
+set separator none
+title PID-Service - PID Create/Update - Components
+
+left to right direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Component>
+
+AddElementTag("Element", $bgColor="#1168bd", $borderColor="#0b4884", $fontColor="#ffffff", $sprite="", $shadowing="", $borderStyle="solid")
+
+AddBoundaryTag("Element", $bgColor="#ffffff", $borderColor="#0b4884", $fontColor="#0b4884", $shadowing="", $borderStyle="solid")
+
+Container_Boundary("PIDService.PIDCreateUpdate_boundary", "PID Create/Update", $tags="Element") {
+  Component(PIDService.PIDCreateUpdate.UUIDforPIDstringgenerator, "UUID for PID string generator", $techn="", $descr="{}", $tags="Element", $link="")
+}
+
+
+SHOW_LEGEND(true)
+@enduml
