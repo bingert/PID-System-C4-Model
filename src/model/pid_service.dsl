@@ -9,11 +9,13 @@ group "pid_service" {
         }
         database = container "Database" {}
 
-        api = container "API" {}
+        api = container "Backend" {}
         
         AAI = container "Authentication Server"
         resolver = container "PID Resolver" 
-        manager = container "PID Create/Update" 
+        manager = container "PID Create/Update" {}
+            uuid = component "UUID for PID string generator" "" {}
+        }
         monitor = container "service quality - monitoring - assurance"
 
         api -> resolver "resolve" 
