@@ -14,7 +14,7 @@ group "pid_service" {
         AAI = container "Authentication Server"
         resolver = container "PID Resolver" 
         manager = container "PID Create/Update" {}
-            uuid = component "UUID for PID string generator" "" {}
+            uuid = component "UUID for PID string generator" {}
         }
         monitor = container "service quality - monitoring - assurance"
 
