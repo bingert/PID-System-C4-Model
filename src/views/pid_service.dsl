@@ -12,3 +12,8 @@ component pid_service.webapp {
     include *
     autolayout lr
 }
+
+component pid_service.manager {
+    include *
+    autolayout lr
+}
