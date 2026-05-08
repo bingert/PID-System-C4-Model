@@ -21,6 +21,7 @@ group "pid_service" {
         resolver = container "PID Resolver" 
         manager = container "PID Create/Update/Tombstoning" {
             uuid = component "UUID for PID string generator" 
+            ulid = component "ULID for PID string generator" 
         }
         
         monitor = container "service quality - monitoring - assurance"
