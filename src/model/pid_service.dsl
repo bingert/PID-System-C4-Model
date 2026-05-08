@@ -7,18 +7,20 @@ group "pid_service" {
             account = component "Nutzer Verwaltung" 
             status = component "Statusanzeige" 
         }
+
         database = container "Database" 
 
         api = container "Backend" {
             rest = component "REST mit OpenAPI Spec"
-            pid_api = component "PID specifc API"
+            pidapi = component "PID specifc API"
         }
         
         AAI = container "Authentication Server"
         resolver = container "PID Resolver" 
-        manager = container "PID Create/Update" {
+        manager = container "PID Create/Update/Tombstoning" {
             uuid = component "UUID for PID string generator" 
         }
+        
         monitor = container "service quality - monitoring - assurance"
 
         api -> resolver "resolve" 
