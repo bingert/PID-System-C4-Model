@@ -6,7 +6,7 @@ group "pid_service" {
             namespace = component "Namensraum Verwaltung" 
             account = component "Nutzer Verwaltung" 
             status = component "Statusanzeige" 
-            pidcreate = component "PID Erzeugung (einzelne)"
+            pidcreate = component "PID Erzeugung Self-Service"
             version =  component "PID Versionierung"
         }
 
