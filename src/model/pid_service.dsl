@@ -36,7 +36,7 @@ group "pid_service" {
         monitor -> database "uses"
         webapp -> monitor "integrates"
     }
-    user -> pid_service.webapp "uses"
-    user2 -> pid_service.api "uses"
+    user -> pid_service.webapp.rest "uses"
+    user2 -> pid_service.api.pidapi "uses"
 
 }
