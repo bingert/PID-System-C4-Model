@@ -20,7 +20,7 @@ Boundary(group_1, "pid_service", $tags="pid_service") {
 Person(User, "User", $descr="", $tags="Person", $link="")
 Person(Client, "Client", $descr="", $tags="Person", $link="")
 
-Rel(User, PIDService, "Uses", $techn="", $tags="Relationship", $link="")
+Rel(User, PIDService, "uses", $techn="", $tags="Relationship", $link="")
 Rel(Client, PIDService, "uses", $techn="", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)

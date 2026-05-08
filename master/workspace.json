@@ -3,7 +3,7 @@
   "description" : "Architecture Overview on a PID service",
   "documentation" : {
     "sections" : [ {
-      "content" : "# C4 Modell PID Service\n\nDie folgenden Diagramme erläutern das Konzept und die Architektur eines \nDienstes für die Erstellung und Verwaltung von einheiltichen und persistenten Identifikatoren.\n\nFür die Darstellung wird das C4 Modell verwendet:\n1. Context‑Ebene – Zeigt, wer (Menschen, Systeme) mit dem System interagiert und welchen Zweck das System hat.\n2. Container‑Ebene – Zerlegt das System in größere Bausteine (z. B. Web‑App, Datenbank, Mobile‑App) und erklärt, wie diese miteinander kommunizieren.\n3. Component‑Ebene – Blickt in jeden Container und stellt die wichtigsten Bauteile (Komponenten) dar, die dort intern zusammenarbeiten.\n4. Code‑Ebene – Zeigt die detaillierten Implementierungsdetails einer einzelnen Komponente, etwa Klassen, Schnittstellen oder Methoden.\n\nDie Diagramme sind interaktiv und ermöglichen die Darstellung weiterer Ebenen.\n\n## PID Service Übersicht\n\nEs werden zwei Verwendungsmöglichkeiten unterschieden:\n1. \"User\": Eine Person die interaktive mit einer WebUI arbeitet\n2. \"Client\": Eine Maschine (Software) die automatisiert Aufgaben abarbeitet\n\n![System Context AP2](embed:pid_service_system_context)\n",
+      "content" : "# C4 Modell PID Service\n\nDie folgenden Diagramme erläutern das Konzept und die Architektur eines \nDienstes für die Erstellung und Verwaltung von einheiltichen und persistenten Identifikatoren.\n\nFür die Darstellung wird das C4 Modell verwendet:\n1. Context‑Ebene – Zeigt, wer (Menschen, Systeme) mit dem System interagiert und welchen Zweck das System hat.\n2. Container‑Ebene – Zerlegt das System in größere Bausteine (z. B. Web‑App, Datenbank, Mobile‑App) und erklärt, wie diese miteinander kommunizieren.\n3. Component‑Ebene – Blickt in jeden Container und stellt die wichtigsten Bauteile (Komponenten) dar, die dort intern zusammenarbeiten.\n4. Code‑Ebene – Zeigt die detaillierten Implementierungsdetails einer einzelnen Komponente, etwa Klassen, Schnittstellen oder Methoden.\n\nDie Diagramme sind interaktiv und ermöglichen die Darstellung weiterer Ebenen.\n\n## PID Service Übersicht\n\nEs werden zwei Verwendungsmöglichkeiten unterschieden:\n1. \"User\": Eine Person die interaktive mit einer WebUI arbeitet\n2. \"Client\": Eine Maschine (Software) die automatisiert Aufgaben abarbeitet\n\n## Funktion des PID Service\n\n1. Authentifizierung (Rollen)\n2. Erstellen und Verwalten von Namensräumen\n3. Erstellen und Verwalten von Persistenten Identifikatoren\n4. Darsellung Monitoring/KPI/QoS\n5. Support\n6. Konvertierung von Kennzahlen\n\n![System Context AP2](embed:pid_service_system_context)\n",
       "format" : "Markdown",
       "order" : 1,
       "title" : ""
@@ -19,16 +19,16 @@
         "structurizr.dsl.identifier" : "user"
       },
       "relationships" : [ {
-        "description" : "Uses",
+        "description" : "uses",
         "destinationId" : "4",
-        "id" : "23",
+        "id" : "25",
         "sourceId" : "1",
         "tags" : "Relationship"
       }, {
-        "description" : "Uses",
+        "description" : "uses",
         "destinationId" : "3",
-        "id" : "24",
-        "linkedRelationshipId" : "23",
+        "id" : "26",
+        "linkedRelationshipId" : "25",
         "sourceId" : "1"
       } ],
       "tags" : "Element,Person"
@@ -42,14 +42,14 @@
       "relationships" : [ {
         "description" : "uses",
         "destinationId" : "9",
-        "id" : "25",
+        "id" : "27",
         "sourceId" : "2",
         "tags" : "Relationship"
       }, {
         "description" : "uses",
         "destinationId" : "3",
-        "id" : "26",
-        "linkedRelationshipId" : "25",
+        "id" : "28",
+        "linkedRelationshipId" : "27",
         "sourceId" : "2"
       } ],
       "tags" : "Element,Person"
@@ -60,7 +60,6 @@
     "softwareSystems" : [ {
       "containers" : [ {
         "components" : [ {
-          "description" : "{}",
           "documentation" : { },
           "id" : "5",
           "name" : "Namensraum Verwaltung",
@@ -69,7 +68,6 @@
           },
           "tags" : "Element,Component"
         }, {
-          "description" : "{}",
           "documentation" : { },
           "id" : "6",
           "name" : "Nutzer Verwaltung",
@@ -78,7 +76,6 @@
           },
           "tags" : "Element,Component"
         }, {
-          "description" : "{}",
           "documentation" : { },
           "id" : "7",
           "name" : "Statusanzeige",
@@ -96,19 +93,18 @@
         "relationships" : [ {
           "description" : "use",
           "destinationId" : "9",
-          "id" : "18",
+          "id" : "20",
           "sourceId" : "4",
           "tags" : "Relationship"
         }, {
           "description" : "integrates",
-          "destinationId" : "14",
-          "id" : "22",
+          "destinationId" : "16",
+          "id" : "24",
           "sourceId" : "4",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container"
       }, {
-        "description" : "{}",
         "documentation" : { },
         "id" : "8",
         "name" : "Database",
@@ -117,7 +113,23 @@
         },
         "tags" : "Element,Container"
       }, {
-        "description" : "{}",
+        "components" : [ {
+          "documentation" : { },
+          "id" : "10",
+          "name" : "REST mit OpenAPI Spec",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pid_service.api.rest"
+          },
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "11",
+          "name" : "PID specifc API",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pid_service.api.pid_api"
+          },
+          "tags" : "Element,Component"
+        } ],
         "documentation" : { },
         "id" : "9",
         "name" : "Backend",
@@ -126,27 +138,27 @@
         },
         "relationships" : [ {
           "description" : "resolve",
-          "destinationId" : "11",
-          "id" : "15",
+          "destinationId" : "13",
+          "id" : "17",
           "sourceId" : "9",
           "tags" : "Relationship"
         }, {
           "description" : "create/update",
-          "destinationId" : "12",
-          "id" : "16",
+          "destinationId" : "14",
+          "id" : "18",
           "sourceId" : "9",
           "tags" : "Relationship"
         }, {
           "description" : "uses",
-          "destinationId" : "10",
-          "id" : "17",
+          "destinationId" : "12",
+          "id" : "19",
           "sourceId" : "9",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container"
       }, {
         "documentation" : { },
-        "id" : "10",
+        "id" : "12",
         "name" : "Authentication Server",
         "properties" : {
           "structurizr.dsl.identifier" : "pid_service.aai"
@@ -154,7 +166,7 @@
         "tags" : "Element,Container"
       }, {
         "documentation" : { },
-        "id" : "11",
+        "id" : "13",
         "name" : "PID Resolver",
         "properties" : {
           "structurizr.dsl.identifier" : "pid_service.resolver"
@@ -162,16 +174,15 @@
         "relationships" : [ {
           "description" : "lookup",
           "destinationId" : "8",
-          "id" : "19",
-          "sourceId" : "11",
+          "id" : "21",
+          "sourceId" : "13",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container"
       }, {
         "components" : [ {
-          "description" : "{}",
           "documentation" : { },
-          "id" : "13",
+          "id" : "15",
           "name" : "UUID for PID string generator",
           "properties" : {
             "structurizr.dsl.identifier" : "pid_service.manager.uuid"
@@ -179,7 +190,7 @@
           "tags" : "Element,Component"
         } ],
         "documentation" : { },
-        "id" : "12",
+        "id" : "14",
         "name" : "PID Create/Update",
         "properties" : {
           "structurizr.dsl.identifier" : "pid_service.manager"
@@ -187,14 +198,14 @@
         "relationships" : [ {
           "description" : "create/update",
           "destinationId" : "8",
-          "id" : "20",
-          "sourceId" : "12",
+          "id" : "22",
+          "sourceId" : "14",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container"
       }, {
         "documentation" : { },
-        "id" : "14",
+        "id" : "16",
         "name" : "service quality - monitoring - assurance",
         "properties" : {
           "structurizr.dsl.identifier" : "pid_service.monitor"
@@ -202,8 +213,8 @@
         "relationships" : [ {
           "description" : "uses",
           "destinationId" : "8",
-          "id" : "21",
-          "sourceId" : "14",
+          "id" : "23",
+          "sourceId" : "16",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container"
@@ -222,7 +233,7 @@
   },
   "name" : "PID System Architecture",
   "properties" : {
-    "structurizr.dsl" : "d29ya3NwYWNlICJQSUQgU3lzdGVtIEFyY2hpdGVjdHVyZSIgIkFyY2hpdGVjdHVyZSBPdmVydmlldyBvbiBhIFBJRCBzZXJ2aWNlIiB7CiAgICAhaWRlbnRpZmllcnMgaGllcmFyY2hpY2FsCiAgICAvLyBpcyB1c2VkIHRvIGFsbG93IHVzIHRvIHJlZmVyIHRvIHRob3NlIGNvbnRhaW5lcnMgdmlhIHRoZWlyIGZ1bGx5IHF1YWxpZmllZCBpZGVudGlmaWVyLgoKICAgIC8vIWFkcnMgImRlY2lzaW9ucyIKICAgICFkb2NzICJhcmNoaXRlY3R1cmUubWQiCiAgICAjIWRvY3MgImRvY3MiCgogICAgY29uZmlndXJhdGlvbiB7CiAgICAgICAgLy9zY29wZSBsYW5kc2NhcGUKICAgIH0KCiAgICBtb2RlbCB7CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJzdHJ1Y3R1cml6ci5ncm91cFNlcGFyYXRvciIgIjoiCiAgICAgICAgfQogICAgCiAgICAgICAgIyBlYWNoIGdyb3VwIHNob3VsZCBoYXZlIGl0J3Mgb3duIGZpbGUgZGVmaW5pbmcgdGhlIGVudGl0aWVzIChlLmcuIHNvZnR3YXJlU3lzdGVtcywgY29udGFpbmVycykgYW5kCiAgICAgICAgIyByZWxhdGlvbnMgYmV0d2VlbiBlbnRpdGllcyBvZiB0aGUgc2FtZSBncm91cC4KICAgIAogICAgICAgICMhaW5jbHVkZSBuYW5vcHViLmRzbAogICAgICAgICMhaW5jbHVkZSBoYW5kbGUuZHNsCiAgICAgICAgIyFpbmNsdWRlIG9wZXJhdGlvbnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIHJlcG9zaXRvcmllcy5kc2wKICAgICAgICAjIWluY2x1ZGUgbWFuYWdlci5kc2wKICAgICAgICAjIWluY2x1ZGUgYWRhcHRlcnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIGFwMi9hcDIuZHNsCiAgICAgICAgCiAgICAgICAgdXNlciA9IHBlcnNvbiAiVXNlciIgewogICAgICAgIAogICAgICAgIH0KICAgICAgICAKICAgICAgICB1c2VyMiA9IHBlcnNvbiAiQ2xpZW50IiB7CiAgICAgICAgICAgIAogICAgICAgIH0KICAgICAgICBncm91cCAicGlkX3NlcnZpY2UiIHsKICAgICAgICAgICAgCiAgICAgICAgCiAgICAgICAgICAgIHBpZF9zZXJ2aWNlID0gc29mdHdhcmVTeXN0ZW0gIlBJRC1TZXJ2aWNlIiAiU2VydmljZSBmb3IgUElEIG1hbmFnZW1lbnQgYW5kIHJlc29sdXRpb24uIiB7CiAgICAgICAgICAgICAgICB3ZWJhcHAgPSBjb250YWluZXIgIldlYiBBcHBsaWNhdGlvbiIgewogICAgICAgICAgICAgICAgICAgIG5hbWVzcGFjZSA9IGNvbXBvbmVudCAiTmFtZW5zcmF1bSBWZXJ3YWx0dW5nIiB7fQogICAgICAgICAgICAgICAgICAgIGFjY291bnQgPSBjb21wb25lbnQgIk51dHplciBWZXJ3YWx0dW5nIiB7fQogICAgICAgICAgICAgICAgICAgIHN0YXR1cyA9IGNvbXBvbmVudCAiU3RhdHVzYW56ZWlnZSIge30KICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGRhdGFiYXNlID0gY29udGFpbmVyICJEYXRhYmFzZSIge30KICAgICAgICAKICAgICAgICAgICAgICAgIGFwaSA9IGNvbnRhaW5lciAiQmFja2VuZCIge30KICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgQUFJID0gY29udGFpbmVyICJBdXRoZW50aWNhdGlvbiBTZXJ2ZXIiCiAgICAgICAgICAgICAgICByZXNvbHZlciA9IGNvbnRhaW5lciAiUElEIFJlc29sdmVyIiAKICAgICAgICAgICAgICAgIG1hbmFnZXIgPSBjb250YWluZXIgIlBJRCBDcmVhdGUvVXBkYXRlIiB7CiAgICAgICAgICAgICAgICAgICAgdXVpZCA9IGNvbXBvbmVudCAiVVVJRCBmb3IgUElEIHN0cmluZyBnZW5lcmF0b3IiIHt9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBtb25pdG9yID0gY29udGFpbmVyICJzZXJ2aWNlIHF1YWxpdHkgLSBtb25pdG9yaW5nIC0gYXNzdXJhbmNlIgogICAgICAgIAogICAgICAgICAgICAgICAgYXBpIC0+IHJlc29sdmVyICJyZXNvbHZlIiAKICAgICAgICAgICAgICAgIGFwaSAtPiBtYW5hZ2VyICJjcmVhdGUvdXBkYXRlIgogICAgICAgICAgICAgICAgYXBpIC0+IEFBSSAidXNlcyIKICAgICAgICAgICAgICAgIHdlYmFwcCAtPiBhcGkgInVzZSIKICAgICAgICAgICAgICAgIHJlc29sdmVyIC0+IGRhdGFiYXNlICJsb29rdXAiCiAgICAgICAgICAgICAgICBtYW5hZ2VyIC0+IGRhdGFiYXNlICJjcmVhdGUvdXBkYXRlIgogICAgICAgICAgICAgICAgbW9uaXRvciAtPiBkYXRhYmFzZSAidXNlcyIKICAgICAgICAgICAgICAgIHdlYmFwcCAtPiBtb25pdG9yICJpbnRlZ3JhdGVzIgogICAgICAgICAgICB9CiAgICAgICAgICAgIHVzZXIgLT4gcGlkX3NlcnZpY2Uud2ViYXBwICJVc2VzIgogICAgICAgICAgICB1c2VyMiAtPiBwaWRfc2VydmljZS5hcGkgInVzZXMiCiAgICAgICAgCiAgICAgICAgfQogICAgCiAgICAgICAgIyB0aGUgcmVsYXRpb25zIGZpbGUgY29udGFpbnMgdGhlIGludGVyLWdyb3VwIHJlbGF0aW9ucwogICAgICAgICMhaW5jbHVkZSByZWxhdGlvbnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIGFwMi9yZWxhdGlvbnMuZHNsCiAgICAKICAgICAgICAjIHNwZWNpYWwgZmlsZSBmb3IgZGVwbG95bWVudAogICAgICAgICMhaW5jbHVkZSAiZGVwbG95bWVudC5kc2wiCiAgICAKICAgIH0KCiAgICB2aWV3cyB7CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJjNHBsYW50dW1sLnRhZ3MiIHRydWUKICAgICAgICAgICAgImdlbmVyYXRyLnNpdGUubmVzdEdyb3VwcyIgdHJ1ZQogICAgICAgICAgICAiZ2VuZXJhdHIuc2l0ZS5leHRlcm5hbFRhZyIgIkV4dGVybiIKICAgICAgICB9CiAgICAgICAgc3lzdGVtTGFuZHNjYXBlIHNsICJTeXN0ZW0gTGFuZHNjYXBlIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICAjIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CgogICAgICAgICMgUnVudGltZSB2aWV3IGRlZmluaXRpb25zCiAgICAgICAgCiAgICAgICAgLyoKICAgICAgICBkeW5hbWljIGhhbmRsZV9zZXJ2ZXIgcmVzb2x2ZV9waWQgewogICAgICAgIAogICAgICAgICAgICB0aXRsZSAiUmVzb2x2ZSBQSUQgdmlhIERPLUlSUCIKICAgICAgICAKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KICAgICAgICAqLwogICAgICAgIHN5c3RlbUNvbnRleHQgcGlkX3NlcnZpY2UgcGlkX3NlcnZpY2Vfc3lzdGVtX2NvbnRleHQgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KICAgICAgICAKICAgICAgICBjb250YWluZXIgcGlkX3NlcnZpY2UgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KICAgICAgICAKICAgICAgICBjb21wb25lbnQgcGlkX3NlcnZpY2Uud2ViYXBwIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CiAgICAgICAgCiAgICAgICAgY29tcG9uZW50IHBpZF9zZXJ2aWNlLm1hbmFnZXIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgLy9kZXBsb3ltZW50ICogdGVzdGJlZCB0ZXN0YmVkX2RlcGxveW1lbnQgewogICAgICAgIC8vICAgIGluY2x1ZGUgKgogICAgICAgIC8vICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICAvL30KCiAgICAgICAgc3R5bGVzIHsKICAgICAgICAgICAgZWxlbWVudCAiRWxlbWVudCIgewogICAgICAgICAgICAgICAgY29sb3Igd2hpdGUKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzExNjhCRAogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMDczQjZGCiAgICAgICAgICAgICAgICBzaGFwZSBwZXJzb24KICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJFeHRlcm4iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzdBOURCRgogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIHByb3BlcnRpZXMgewogICAgICAgICAgICAiZ2VuZXJhdHIubWFya2Rvd24uZmxleG1hcmsuZXh0ZW5zaW9ucyIgIlRhYmxlT2ZDb250ZW50cyxUYWJsZXMsQWRtb25pdGlvbixGb290bm90ZXMiCiAgICAgICAgfQogICAgfQp9"
+    "structurizr.dsl" : "d29ya3NwYWNlICJQSUQgU3lzdGVtIEFyY2hpdGVjdHVyZSIgIkFyY2hpdGVjdHVyZSBPdmVydmlldyBvbiBhIFBJRCBzZXJ2aWNlIiB7CiAgICAhaWRlbnRpZmllcnMgaGllcmFyY2hpY2FsCiAgICAvLyBpcyB1c2VkIHRvIGFsbG93IHVzIHRvIHJlZmVyIHRvIHRob3NlIGNvbnRhaW5lcnMgdmlhIHRoZWlyIGZ1bGx5IHF1YWxpZmllZCBpZGVudGlmaWVyLgoKICAgIC8vIWFkcnMgImRlY2lzaW9ucyIKICAgICFkb2NzICJhcmNoaXRlY3R1cmUubWQiCiAgICAjIWRvY3MgImRvY3MiCgogICAgY29uZmlndXJhdGlvbiB7CiAgICAgICAgLy9zY29wZSBsYW5kc2NhcGUKICAgIH0KCiAgICBtb2RlbCB7CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJzdHJ1Y3R1cml6ci5ncm91cFNlcGFyYXRvciIgIjoiCiAgICAgICAgfQogICAgCiAgICAgICAgIyBlYWNoIGdyb3VwIHNob3VsZCBoYXZlIGl0J3Mgb3duIGZpbGUgZGVmaW5pbmcgdGhlIGVudGl0aWVzIChlLmcuIHNvZnR3YXJlU3lzdGVtcywgY29udGFpbmVycykgYW5kCiAgICAgICAgIyByZWxhdGlvbnMgYmV0d2VlbiBlbnRpdGllcyBvZiB0aGUgc2FtZSBncm91cC4KICAgIAogICAgICAgICMhaW5jbHVkZSBuYW5vcHViLmRzbAogICAgICAgICMhaW5jbHVkZSBoYW5kbGUuZHNsCiAgICAgICAgIyFpbmNsdWRlIG9wZXJhdGlvbnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIHJlcG9zaXRvcmllcy5kc2wKICAgICAgICAjIWluY2x1ZGUgbWFuYWdlci5kc2wKICAgICAgICAjIWluY2x1ZGUgYWRhcHRlcnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIGFwMi9hcDIuZHNsCiAgICAgICAgCiAgICAgICAgdXNlciA9IHBlcnNvbiAiVXNlciIgewogICAgICAgIAogICAgICAgIH0KICAgICAgICAKICAgICAgICB1c2VyMiA9IHBlcnNvbiAiQ2xpZW50IiB7CiAgICAgICAgICAgIAogICAgICAgIH0KICAgICAgICBncm91cCAicGlkX3NlcnZpY2UiIHsKICAgICAgICAgICAgCiAgICAgICAgCiAgICAgICAgICAgIHBpZF9zZXJ2aWNlID0gc29mdHdhcmVTeXN0ZW0gIlBJRC1TZXJ2aWNlIiAiU2VydmljZSBmb3IgUElEIG1hbmFnZW1lbnQgYW5kIHJlc29sdXRpb24uIiB7CiAgICAgICAgICAgICAgICB3ZWJhcHAgPSBjb250YWluZXIgIldlYiBBcHBsaWNhdGlvbiIgewogICAgICAgICAgICAgICAgICAgIG5hbWVzcGFjZSA9IGNvbXBvbmVudCAiTmFtZW5zcmF1bSBWZXJ3YWx0dW5nIiAKICAgICAgICAgICAgICAgICAgICBhY2NvdW50ID0gY29tcG9uZW50ICJOdXR6ZXIgVmVyd2FsdHVuZyIgCiAgICAgICAgICAgICAgICAgICAgc3RhdHVzID0gY29tcG9uZW50ICJTdGF0dXNhbnplaWdlIiAKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGRhdGFiYXNlID0gY29udGFpbmVyICJEYXRhYmFzZSIgCiAgICAgICAgCiAgICAgICAgICAgICAgICBhcGkgPSBjb250YWluZXIgIkJhY2tlbmQiIHsKICAgICAgICAgICAgICAgICAgICByZXN0ID0gY29tcG9uZW50ICJSRVNUIG1pdCBPcGVuQVBJIFNwZWMiCiAgICAgICAgICAgICAgICAgICAgcGlkX2FwaSA9IGNvbXBvbmVudCAiUElEIHNwZWNpZmMgQVBJIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICBBQUkgPSBjb250YWluZXIgIkF1dGhlbnRpY2F0aW9uIFNlcnZlciIKICAgICAgICAgICAgICAgIHJlc29sdmVyID0gY29udGFpbmVyICJQSUQgUmVzb2x2ZXIiIAogICAgICAgICAgICAgICAgbWFuYWdlciA9IGNvbnRhaW5lciAiUElEIENyZWF0ZS9VcGRhdGUiIHsKICAgICAgICAgICAgICAgICAgICB1dWlkID0gY29tcG9uZW50ICJVVUlEIGZvciBQSUQgc3RyaW5nIGdlbmVyYXRvciIgCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBtb25pdG9yID0gY29udGFpbmVyICJzZXJ2aWNlIHF1YWxpdHkgLSBtb25pdG9yaW5nIC0gYXNzdXJhbmNlIgogICAgICAgIAogICAgICAgICAgICAgICAgYXBpIC0+IHJlc29sdmVyICJyZXNvbHZlIiAKICAgICAgICAgICAgICAgIGFwaSAtPiBtYW5hZ2VyICJjcmVhdGUvdXBkYXRlIgogICAgICAgICAgICAgICAgYXBpIC0+IEFBSSAidXNlcyIKICAgICAgICAgICAgICAgIHdlYmFwcCAtPiBhcGkgInVzZSIKICAgICAgICAgICAgICAgIHJlc29sdmVyIC0+IGRhdGFiYXNlICJsb29rdXAiCiAgICAgICAgICAgICAgICBtYW5hZ2VyIC0+IGRhdGFiYXNlICJjcmVhdGUvdXBkYXRlIgogICAgICAgICAgICAgICAgbW9uaXRvciAtPiBkYXRhYmFzZSAidXNlcyIKICAgICAgICAgICAgICAgIHdlYmFwcCAtPiBtb25pdG9yICJpbnRlZ3JhdGVzIgogICAgICAgICAgICB9CiAgICAgICAgICAgIHVzZXIgLT4gcGlkX3NlcnZpY2Uud2ViYXBwICJ1c2VzIgogICAgICAgICAgICB1c2VyMiAtPiBwaWRfc2VydmljZS5hcGkgInVzZXMiCiAgICAgICAgCiAgICAgICAgfQogICAgCiAgICAgICAgIyB0aGUgcmVsYXRpb25zIGZpbGUgY29udGFpbnMgdGhlIGludGVyLWdyb3VwIHJlbGF0aW9ucwogICAgICAgICMhaW5jbHVkZSByZWxhdGlvbnMuZHNsCiAgICAgICAgIyFpbmNsdWRlIGFwMi9yZWxhdGlvbnMuZHNsCiAgICAKICAgICAgICAjIHNwZWNpYWwgZmlsZSBmb3IgZGVwbG95bWVudAogICAgICAgICMhaW5jbHVkZSAiZGVwbG95bWVudC5kc2wiCiAgICAKICAgIH0KCiAgICB2aWV3cyB7CiAgICAgICAgcHJvcGVydGllcyB7CiAgICAgICAgICAgICJjNHBsYW50dW1sLnRhZ3MiIHRydWUKICAgICAgICAgICAgImdlbmVyYXRyLnNpdGUubmVzdEdyb3VwcyIgdHJ1ZQogICAgICAgICAgICAiZ2VuZXJhdHIuc2l0ZS5leHRlcm5hbFRhZyIgIkV4dGVybiIKICAgICAgICB9CiAgICAgICAgc3lzdGVtTGFuZHNjYXBlIHNsICJTeXN0ZW0gTGFuZHNjYXBlIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICAjIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CgogICAgICAgICMgUnVudGltZSB2aWV3IGRlZmluaXRpb25zCiAgICAgICAgCiAgICAgICAgLyoKICAgICAgICBkeW5hbWljIGhhbmRsZV9zZXJ2ZXIgcmVzb2x2ZV9waWQgewogICAgICAgIAogICAgICAgICAgICB0aXRsZSAiUmVzb2x2ZSBQSUQgdmlhIERPLUlSUCIKICAgICAgICAKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KICAgICAgICAqLwogICAgICAgIHN5c3RlbUNvbnRleHQgcGlkX3NlcnZpY2UgcGlkX3NlcnZpY2Vfc3lzdGVtX2NvbnRleHQgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KICAgICAgICAKICAgICAgICBjb250YWluZXIgcGlkX3NlcnZpY2UgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KICAgICAgICAKICAgICAgICBjb21wb25lbnQgcGlkX3NlcnZpY2Uud2ViYXBwIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CiAgICAgICAgCiAgICAgICAgY29tcG9uZW50IHBpZF9zZXJ2aWNlLm1hbmFnZXIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgLy9kZXBsb3ltZW50ICogdGVzdGJlZCB0ZXN0YmVkX2RlcGxveW1lbnQgewogICAgICAgIC8vICAgIGluY2x1ZGUgKgogICAgICAgIC8vICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICAvL30KCiAgICAgICAgc3R5bGVzIHsKICAgICAgICAgICAgZWxlbWVudCAiRWxlbWVudCIgewogICAgICAgICAgICAgICAgY29sb3Igd2hpdGUKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzExNjhCRAogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMDczQjZGCiAgICAgICAgICAgICAgICBzaGFwZSBwZXJzb24KICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJFeHRlcm4iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzdBOURCRgogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIHByb3BlcnRpZXMgewogICAgICAgICAgICAiZ2VuZXJhdHIubWFya2Rvd24uZmxleG1hcmsuZXh0ZW5zaW9ucyIgIlRhYmxlT2ZDb250ZW50cyxUYWJsZXMsQWRtb25pdGlvbixGb290bm90ZXMiCiAgICAgICAgfQogICAgfQp9"
   },
   "views" : {
     "componentViews" : [ {
@@ -263,9 +274,9 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "containerId" : "12",
+      "containerId" : "14",
       "elements" : [ {
-        "id" : "13",
+        "id" : "15",
         "x" : 0,
         "y" : 0
       } ],
@@ -329,19 +340,19 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "10",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "11",
-        "x" : 0,
-        "y" : 0
-      }, {
         "id" : "12",
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
         "x" : 0,
         "y" : 0
       } ],
@@ -350,10 +361,6 @@
       "key" : "Container-001",
       "order" : 3,
       "relationships" : [ {
-        "id" : "15"
-      }, {
-        "id" : "16"
-      }, {
         "id" : "17"
       }, {
         "id" : "18"
@@ -368,7 +375,11 @@
       }, {
         "id" : "23"
       }, {
+        "id" : "24"
+      }, {
         "id" : "25"
+      }, {
+        "id" : "27"
       } ],
       "softwareSystemId" : "3"
     } ],
@@ -399,9 +410,9 @@
       "key" : "pid_service_system_context",
       "order" : 2,
       "relationships" : [ {
-        "id" : "24"
-      }, {
         "id" : "26"
+      }, {
+        "id" : "28"
       } ],
       "softwareSystemId" : "3"
     } ],
@@ -424,9 +435,9 @@
       "key" : "sl",
       "order" : 1,
       "relationships" : [ {
-        "id" : "24"
-      }, {
         "id" : "26"
+      }, {
+        "id" : "28"
       } ]
     } ]
   }

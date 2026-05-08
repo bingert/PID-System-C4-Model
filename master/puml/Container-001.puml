@@ -24,8 +24,8 @@ System_Boundary("PIDService_boundary", "PID-Service", $tags="Element") {
   Container(PIDService.PIDCreateUpdate, "PID Create/Update", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.servicequalitymonitoringassurance, "service quality - monitoring - assurance", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.WebApplication, "Web Application", $techn="", $descr="", $tags="Element", $link="")
-  Container(PIDService.Database, "Database", $techn="", $descr="{}", $tags="Element", $link="")
-  Container(PIDService.Backend, "Backend", $techn="", $descr="{}", $tags="Element", $link="")
+  Container(PIDService.Database, "Database", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.Backend, "Backend", $techn="", $descr="", $tags="Element", $link="")
 }
 
 Rel(PIDService.Backend, PIDService.PIDResolver, "resolve", $techn="", $tags="Relationship", $link="")
@@ -36,7 +36,7 @@ Rel(PIDService.PIDResolver, PIDService.Database, "lookup", $techn="", $tags="Rel
 Rel(PIDService.PIDCreateUpdate, PIDService.Database, "create/update", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.servicequalitymonitoringassurance, PIDService.Database, "uses", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.WebApplication, PIDService.servicequalitymonitoringassurance, "integrates", $techn="", $tags="Relationship", $link="")
-Rel(User, PIDService.WebApplication, "Uses", $techn="", $tags="Relationship", $link="")
+Rel(User, PIDService.WebApplication, "uses", $techn="", $tags="Relationship", $link="")
 Rel(Client, PIDService.Backend, "uses", $techn="", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)

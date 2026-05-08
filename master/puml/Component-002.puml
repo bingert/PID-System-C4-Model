@@ -13,7 +13,7 @@ AddElementTag("Element", $bgColor="#1168bd", $borderColor="#0b4884", $fontColor=
 AddBoundaryTag("Element", $bgColor="#ffffff", $borderColor="#0b4884", $fontColor="#0b4884", $shadowing="", $borderStyle="solid")
 
 Container_Boundary("PIDService.PIDCreateUpdate_boundary", "PID Create/Update", $tags="Element") {
-  Component(PIDService.PIDCreateUpdate.UUIDforPIDstringgenerator, "UUID for PID string generator", $techn="", $descr="{}", $tags="Element", $link="")
+  Component(PIDService.PIDCreateUpdate.UUIDforPIDstringgenerator, "UUID for PID string generator", $techn="", $descr="", $tags="Element", $link="")
 }
 
 
