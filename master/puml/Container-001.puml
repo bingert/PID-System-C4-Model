@@ -21,7 +21,7 @@ Person(Client, "Client", $descr="", $tags="Person", $link="")
 System_Boundary("PIDService_boundary", "PID-Service", $tags="Element") {
   Container(PIDService.AuthenticationServer, "Authentication Server", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.PIDResolver, "PID Resolver", $techn="", $descr="", $tags="Element", $link="")
-  Container(PIDService.PIDCreateUpdate, "PID Create/Update", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.PIDCreateUpdateTombstoning, "PID Create/Update/Tombstoning", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.servicequalitymonitoringassurance, "service quality - monitoring - assurance", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.WebApplication, "Web Application", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.Database, "Database", $techn="", $descr="", $tags="Element", $link="")
@@ -29,11 +29,11 @@ System_Boundary("PIDService_boundary", "PID-Service", $tags="Element") {
 }
 
 Rel(PIDService.Backend, PIDService.PIDResolver, "resolve", $techn="", $tags="Relationship", $link="")
-Rel(PIDService.Backend, PIDService.PIDCreateUpdate, "create/update", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.Backend, PIDService.PIDCreateUpdateTombstoning, "create/update", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.Backend, PIDService.AuthenticationServer, "uses", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.WebApplication, PIDService.Backend, "use", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.PIDResolver, PIDService.Database, "lookup", $techn="", $tags="Relationship", $link="")
-Rel(PIDService.PIDCreateUpdate, PIDService.Database, "create/update", $techn="", $tags="Relationship", $link="")
+Rel(PIDService.PIDCreateUpdateTombstoning, PIDService.Database, "create/update", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.servicequalitymonitoringassurance, PIDService.Database, "uses", $techn="", $tags="Relationship", $link="")
 Rel(PIDService.WebApplication, PIDService.servicequalitymonitoringassurance, "integrates", $techn="", $tags="Relationship", $link="")
 Rel(User, PIDService.WebApplication, "uses", $techn="", $tags="Relationship", $link="")

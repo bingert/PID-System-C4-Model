@@ -1,6 +1,6 @@
 @startuml
 set separator none
-title PID-Service - PID Create/Update/Tombstoning - Components
+title PID-Service - Backend - Components
 
 left to right direction
 
@@ -12,8 +12,9 @@ AddElementTag("Element", $bgColor="#1168bd", $borderColor="#0b4884", $fontColor=
 
 AddBoundaryTag("Element", $bgColor="#ffffff", $borderColor="#0b4884", $fontColor="#0b4884", $shadowing="", $borderStyle="solid")
 
-Container_Boundary("PIDService.PIDCreateUpdateTombstoning_boundary", "PID Create/Update/Tombstoning", $tags="Element") {
-  Component(PIDService.PIDCreateUpdateTombstoning.UUIDforPIDstringgenerator, "UUID for PID string generator", $techn="", $descr="", $tags="Element", $link="")
+Container_Boundary("PIDService.Backend_boundary", "Backend", $tags="Element") {
+  Component(PIDService.Backend.RESTmitOpenAPISpec, "REST mit OpenAPI Spec", $techn="", $descr="", $tags="Element", $link="")
+  Component(PIDService.Backend.PIDspecifcAPI, "PID specifc API", $techn="", $descr="", $tags="Element", $link="")
 }
 
 
