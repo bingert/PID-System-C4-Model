@@ -15,6 +15,7 @@ AddBoundaryTag("Element", $bgColor="#ffffff", $borderColor="#0b4884", $fontColor
 Container_Boundary("PIDService.Backend_boundary", "Backend", $tags="Element") {
   Component(PIDService.Backend.RESTmitOpenAPISpec, "REST mit OpenAPI Spec", $techn="", $descr="", $tags="Element", $link="")
   Component(PIDService.Backend.PIDspecifcAPI, "PID specifc API", $techn="", $descr="", $tags="Element", $link="")
+  Component(PIDService.Backend.RollenRechteManagement, "Rollen/Rechte Management", $techn="", $descr="", $tags="Element", $link="")
 }
 
 
