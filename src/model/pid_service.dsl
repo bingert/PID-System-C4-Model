@@ -15,6 +15,7 @@ group "pid_service" {
         api = container "Backend" {
             rest = component "REST mit OpenAPI Spec"
             pidapi = component "PID specifc API"
+            role = component "Rollen/Rechte Management"
         }
         
         AAI = container "Authentication Server"
