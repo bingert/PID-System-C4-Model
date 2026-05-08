@@ -30,7 +30,7 @@ group "pid_service" {
         api -> resolver "resolve" 
         api -> manager "create/update"
         api -> AAI "uses"
-        webapp -> api "use"
+        webapp -> api.rest "use"
         resolver -> database "lookup"
         manager -> database "create/update"
         monitor -> database "uses"
