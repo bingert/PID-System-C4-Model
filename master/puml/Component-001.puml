@@ -16,6 +16,8 @@ Container_Boundary("PIDService.WebApplication_boundary", "Web Application", $tag
   Component(PIDService.WebApplication.NamensraumVerwaltung, "Namensraum Verwaltung", $techn="", $descr="", $tags="Element", $link="")
   Component(PIDService.WebApplication.NutzerVerwaltung, "Nutzer Verwaltung", $techn="", $descr="", $tags="Element", $link="")
   Component(PIDService.WebApplication.Statusanzeige, "Statusanzeige", $techn="", $descr="", $tags="Element", $link="")
+  Component(PIDService.WebApplication.PIDErzeugungeinzelne, "PID Erzeugung (einzelne)", $techn="", $descr="", $tags="Element", $link="")
+  Component(PIDService.WebApplication.PIDVersionierung, "PID Versionierung", $techn="", $descr="", $tags="Element", $link="")
 }
 
 

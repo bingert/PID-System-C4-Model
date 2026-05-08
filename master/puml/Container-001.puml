@@ -19,13 +19,13 @@ Person(User, "User", $descr="", $tags="Person", $link="")
 Person(Client, "Client", $descr="", $tags="Person", $link="")
 
 System_Boundary("PIDService_boundary", "PID-Service", $tags="Element") {
+  Container(PIDService.Database, "Database", $techn="", $descr="", $tags="Element", $link="")
+  Container(PIDService.Backend, "Backend", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.AuthenticationServer, "Authentication Server", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.PIDResolver, "PID Resolver", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.PIDCreateUpdateTombstoning, "PID Create/Update/Tombstoning", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.servicequalitymonitoringassurance, "service quality - monitoring - assurance", $techn="", $descr="", $tags="Element", $link="")
   Container(PIDService.WebApplication, "Web Application", $techn="", $descr="", $tags="Element", $link="")
-  Container(PIDService.Database, "Database", $techn="", $descr="", $tags="Element", $link="")
-  Container(PIDService.Backend, "Backend", $techn="", $descr="", $tags="Element", $link="")
 }
 
 Rel(PIDService.Backend, PIDService.PIDResolver, "resolve", $techn="", $tags="Relationship", $link="")
