@@ -4,7 +4,7 @@ workspace "PID System Architecture" "Architecture Overview on a PID service" {
 
     //!adrs "decisions"
     !docs "architecture.md"
-    #!docs "docs"
+    !docs "docs"
 
     configuration {
         //scope landscape
