@@ -14,7 +14,7 @@
       "order" : 2,
       "title" : ""
     }, {
-      "content" : "# Use Cases\n\n## PID Selfservice\n\n## Automatisierte PID Erzeugung\n\n## Auflösung von PIDs\n",
+      "content" : "# User Stories\n\nDie User Stories werden nach dem Schema\n* Als **Rolle** möchte ich **Ziel/Wunsch**, damit **Nutzen/Mehrwert**.\ndefiniert.\n\n## 1 Auflösung von PIDs\n\nAls **Mitarbeiter der Verwaltung** möchte ich **PIDs auflösen**, damit **ich auf die referenzierten Information zugreifen kann**\n\n\n\n## 2 PID Selfservice\n\nAls **Mitarbeiter der Verwaltung** möchte ich **einzelne PIDs erzeugen**, damit **ich diese in Dokumente/Formulare eintragen kann**\n\n## 3 Automatisierte PID Erzeugung\n\nAls **System Administrator** möchte ich **große Mengen an PIDs automatisiert erzeugen**, damit **eigene Datensätze/Dokumente mit PIDs versehen werden**\n\n\n## Rollen\n\n* Mitarbeiter der Verwaltung\n* System Administrator",
       "filename" : "use-cases.md",
       "format" : "Markdown",
       "order" : 3,
